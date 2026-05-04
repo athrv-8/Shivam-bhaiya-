@@ -1,1 +1,245 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHREE BALA JI | MISSION CONTROL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #000000;
+            --nasa-white: #ffffff;
+        }
+        
+        body {
+            background-color: var(--space-black);
+            color: var(--nasa-white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Tech Scanlines */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 5;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            from { bottom: 100%; }
+            to { bottom: -100px; }
+        }
+
+        /* Hero Grid Pattern */
+        .hero-grid {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            mask-image: radial-gradient(circle at center, black, transparent 90%);
+        }
+
+        .btn-space {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        @media (hover: hover) {
+            .btn-space:hover {
+                background: white;
+                color: black;
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); opacity: 0.2; }
+            50% { transform: translateY(10px); opacity: 1; }
+        }
+        .scroll-indicator { animation: bounce-slow 2s infinite; }
+
+        /* Mobile Menu Toggle Logic */
+        #menu-toggle:checked ~ #mobile-menu {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="relative">
+    <div class="scanline"></div>
+
+    <!-- NAV SECTION -->
+    <nav class="flex justify-between items-center p-5 md:p-6 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-xl z-[100]">
+        <div class="text-2xl md:text-3xl font-black tracking-tighter mono">Sb<span class="text-white/30">.</span></div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] uppercase font-bold opacity-40">
+            <a href="#" class="hover:opacity-100 transition-all">Solutions</a>
+            <a href="#" class="hover:opacity-100 transition-all">About Us</a>
+            <a href="#" class="hover:opacity-100 transition-all">Contact Us</a>
+            <a href="#" class="hover:opacity-100 transition-all">Why Us</a>
+        </div>
+
+        <!-- Mobile Menu Controls -->
+        <div class="md:hidden flex items-center">
+            <label for="menu-toggle" class="cursor-pointer p-2 border border-white/20 rounded">
+                <div class="flex items-center gap-2">
+                    <span class="mono text-[10px] tracking-widest uppercase opacity-60">Menu</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </div>
+            </label>
+        </div>
+        
+        <input type="checkbox" id="menu-toggle" class="hidden">
+        
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-black/95 border-b border-white/10 flex-col p-8 gap-6 md:hidden z-50">
+            <a href="#" class="mono text-sm tracking-[0.2em] uppercase border-b border-white/5 pb-2">Solutions</a>
+            <a href="#" class="mono text-sm tracking-[0.2em] uppercase border-b border-white/5 pb-2">About Us</a>
+            <a href="#" class="mono text-sm tracking-[0.2em] uppercase border-b border-white/5 pb-2">Contact Us</a>
+            <a href="#" class="mono text-sm tracking-[0.2em] uppercase border-b border-white/5 pb-2">Why Us</a>
+        </div>
+
+        <div class="hidden md:block mono text-[9px] text-white/40 border border-white/20 px-3 py-1 rounded">MISSION_READY</div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <main class="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden pt-20 pb-32">
+        <div class="hero-grid absolute inset-0 -z-10"></div>
+        
+        <div class="mb-6 mono text-[9px] md:text-[10px] tracking-[0.4em] md:tracking-[0.6em] uppercase text-white/40">Technical Operations Center</div>
+        <h1 class="text-5xl sm:text-7xl md:text-[130px] font-black uppercase leading-[0.9] tracking-tighter mb-10">
+            DIGITAL<br>WORKFLOW<span class="text-white/20">.</span>
+        </h1>
+        
+        <div class="flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-none justify-center">
+            <button class="btn-space border border-white px-8 py-4 md:px-12 md:py-5 uppercase text-[10px] md:text-xs tracking-[0.2em] font-bold bg-white text-black w-full sm:w-auto">Contact Us</button>
+            <button class="btn-space border border-white/20 bg-white/5 px-8 py-4 md:px-12 md:py-5 uppercase text-[10px] md:text-xs tracking-[0.2em] font-bold w-full sm:w-auto">Explore Us</button>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 flex flex-col items-center opacity-40">
+            <span class="mono text-[8px] uppercase tracking-[0.3em] mb-2">Scroll Down</span>
+            <div class="scroll-indicator">
+                <svg width="12" height="12" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 12L7.5 3M7.5 12L11 8.5M7.5 12L4 8.5" stroke="white" stroke-width="1.5"/></svg>
+            </div>
+        </div>
+    </main>
+
+    <!-- 6 CARD GRID SECTION -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-white/10">
+        <!-- UNIT 01 -->
+        <div class="relative p-10 md:p-16 border-b border-white/10 sm:border-r hover:bg-white/[0.03] transition-all group overflow-hidden cursor-pointer">
+            <div class="mono text-[10px] text-white/30 mb-6 md:mb-8 tracking-[0.4em]">[ UNIT_01 ]</div>
+            <h3 class="text-3xl md:text-4xl font-light uppercase tracking-tighter mb-4">Identity Hub</h3>
+            <p class="text-sm text-white/40 leading-relaxed font-light">Aadhar verification and high-priority document processing terminal.</p>
+            <!-- White line animation -->
+            <div class="absolute bottom-0 left-0 h-1 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+        </div>
+
+        <!-- UNIT 02 -->
+        <div class="relative p-10 md:p-16 border-b border-white/10 lg:border-r hover:bg-white/[0.03] transition-all group overflow-hidden cursor-pointer">
+            <div class="mono text-[10px] text-white/30 mb-6 md:mb-8 tracking-[0.4em]">[ UNIT_02 ]</div>
+            <h3 class="text-3xl md:text-4xl font-light uppercase tracking-tighter mb-4">Fiscal Node</h3>
+            <p class="text-sm text-white/40 leading-relaxed font-light">AEPS enabled secure banking and digital asset transfers.</p>
+            <div class="absolute bottom-0 left-0 h-1 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+        </div>
+
+        <!-- UNIT 03 -->
+        <div class="relative p-10 md:p-16 border-b border-white/10 sm:border-r lg:border-r-0 hover:bg-white/[0.03] transition-all group overflow-hidden cursor-pointer">
+            <div class="mono text-[10px] text-white/30 mb-6 md:mb-8 tracking-[0.4em]">[ UNIT_03 ]</div>
+            <h3 class="text-3xl md:text-4xl font-light uppercase tracking-tighter mb-4">Hardware Lab</h3>
+            <p class="text-sm text-white/40 leading-relaxed font-light">Advanced smartphone diagnostics and structural repairs.</p>
+            <div class="absolute bottom-0 left-0 h-1 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+        </div>
+
+        <!-- UNIT 04 -->
+        <div class="relative p-10 md:p-16 border-b border-white/10 lg:border-r hover:bg-white/[0.03] transition-all group overflow-hidden cursor-pointer">
+            <div class="mono text-[10px] text-white/30 mb-6 md:mb-8 tracking-[0.4em]">[ UNIT_04 ]</div>
+            <h3 class="text-3xl md:text-4xl font-light uppercase tracking-tighter mb-4">Tax Systems</h3>
+            <p class="text-sm text-white/40 leading-relaxed font-light">GST registration and commercial tax filing protocols.</p>
+            <div class="absolute bottom-0 left-0 h-1 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+        </div>
+
+        <!-- UNIT 05 -->
+        <div class="relative p-10 md:p-16 border-b border-white/10 sm:border-r hover:bg-white/[0.03] transition-all group overflow-hidden cursor-pointer">
+            <div class="mono text-[10px] text-white/30 mb-6 md:mb-8 tracking-[0.4em]">[ UNIT_05 ]</div>
+            <h3 class="text-3xl md:text-4xl font-light uppercase tracking-tighter mb-4">Logic Store</h3>
+            <p class="text-sm text-white/40 leading-relaxed font-light">Inventory of premium tech accessories and smart modules.</p>
+            <div class="absolute bottom-0 left-0 h-1 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+        </div>
+
+        <!-- UNIT 06 -->
+        <div class="relative p-10 md:p-16 border-b border-white/10 hover:bg-white/[0.03] transition-all group overflow-hidden cursor-pointer">
+            <div class="mono text-[10px] text-white/30 mb-6 md:mb-8 tracking-[0.4em]">[ UNIT_06 ]</div>
+            <h3 class="text-3xl md:text-4xl font-light uppercase tracking-tighter mb-4">Travel Grid</h3>
+            <p class="text-sm text-white/40 leading-relaxed font-light">Global flight and rail logistics booking terminal.</p>
+            <div class="absolute bottom-0 left-0 h-1 bg-white w-0 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+        </div>
+    </section>
+
+    <!-- UPCOMING SECTION -->
+    <section class="py-24 md:py-32 px-6 bg-white/5 border-t border-b border-white/10 text-center overflow-hidden">
+        <h4 class="mono text-[10px] tracking-[0.6em] md:tracking-[1em] uppercase text-white/30 mb-6">Pipeline</h4>
+        <h2 class="text-5xl md:text-8xl font-black uppercase italic tracking-tighter opacity-80 leading-none">UPCOMING</h2>
+        <p class="mt-6 mono text-[9px] md:text-[10px] text-white/20 tracking-[0.2em] px-4">Deployment in progress for AI-assisted support modules.</p>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="p-8 md:p-24 border-t border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+        <div class="space-y-10 md:space-y-12">
+            <div>
+                <h4 class="mono text-[10px] tracking-[0.4em] uppercase mb-6 text-white/30">Primary Terminal</h4>
+                <p class="text-2xl md:text-3xl font-light uppercase tracking-tighter leading-tight">
+                    Uttar Pradesh<br>
+                    Siddharthnagar<br>
+                    <span class="text-white/40">Shree Bala Ji Kendra</span><br>
+                    Kapiya - Bazaar
+                </p>
+            </div>
+            <div class="text-[9px] mono opacity-20 uppercase tracking-[0.3em] md:tracking-[0.5em]">
+                All rights reserved under Shivansh // 2026
+            </div>
+        </div>
+
+        <div class="space-y-10 md:space-y-12 lg:text-right">
+            <div>
+                <h4 class="mono text-[10px] tracking-[0.4em] uppercase mb-6 text-white/30 lg:text-right">Comms / Data</h4>
+                <div class="space-y-4 md:space-y-2">
+                    <p class="text-lg md:text-xl mono break-all">PHN: +91 8595223964</p>
+                    <p class="text-lg md:text-xl mono break-all">MAIL: contact@shreebalaji.lab</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap lg:justify-end gap-x-6 gap-y-4 text-[10px] mono uppercase tracking-widest opacity-40">
+                <a href="#" class="hover:text-white transition-all underline md:no-underline">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-all underline md:no-underline">Disclaimer</a>
+                <a href="#" class="hover:text-white transition-all underline md:no-underline">Terms</a>
+            </div>
+            <div class="text-[9px] mono opacity-20 uppercase tracking-[0.2em]">
+                Encrypted Connection Enabled.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+```
+  
